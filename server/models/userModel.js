@@ -7,6 +7,13 @@ const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    /* To-Do: Add favorites to user schema
+    favorites: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recipe',
+      },
+    ], */
   },
   { timestamps: true }
 );
