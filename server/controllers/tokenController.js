@@ -34,10 +34,10 @@ tokenController.generateToken = (_req, res, next) => {
   const id = res.locals.user._id;
   try {
     res.locals.token = jwt.sign({ id }, process.env.JWT_SECRET, {
-      expires: '30d',
+      expiresIn: '30d',
     });
     next();
-  } catch {
+  } catch (err) {
     return next({
       log: `Error caught in tokenController.generateToken: ${err}`,
       message: {
