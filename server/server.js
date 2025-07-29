@@ -3,6 +3,7 @@ import path from 'path';
 // import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
+import recipeRouter from './routes/recipes.js';
 
 dotenv.config();
 const app = express();
@@ -21,9 +22,11 @@ app.get('/', (_req, res) => {
   );
 });
 
+app.use('/recipes', recipeRouter);
+
 /* 404 handler - TO-DO: Create custom page */
 app.use('*catchall', (_req, res) => {
-  res.status(404).send('Not Found');
+  res.status(404).send('Spaghetti-oh-no! Not Found');
 });
 
 /* Global error handler */
@@ -36,5 +39,3 @@ app.listen(PORT, () => {
   connectDB();
   console.log(`🚀 express server listening on port ${PORT}`);
 });
-
-// module.exports = app;

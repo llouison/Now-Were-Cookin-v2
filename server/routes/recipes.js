@@ -1,5 +1,5 @@
 import express from 'express';
-import recipeController from '../controllers/recipeController';
+import recipeController from '../controllers/recipeController.js';
 
 const router = express.Router();
 
@@ -22,3 +22,5 @@ router.put('/:id', recipeController.updateOneRecipe, (_req, res) => {
 router.delete('/:id', recipeController.deleteOneRecipe, (_req, res) => {
   res.status(200).send({ deletedRecipe: res.locals.recipe });
 });
+
+export default router;

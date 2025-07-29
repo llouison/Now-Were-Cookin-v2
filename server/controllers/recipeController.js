@@ -1,4 +1,4 @@
-import Recipe from '../models/recipeModel';
+import Recipe from '../models/recipeModel.js';
 
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;
@@ -132,4 +132,4 @@ recipeController.deleteOneRecipe = async (req, res, next) => {
   }
 };
 
-module.exports = recipeController;
+export default recipeController;
