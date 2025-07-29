@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 
 const SALT_WORK_FACTOR = 10;
 
-const userSchema = new Schema(
+const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -32,4 +32,4 @@ userSchema.methods.comparePasswords = async function (submittedPassword) {
   return await bcrypt.compare(submittedPassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);
