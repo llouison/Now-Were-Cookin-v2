@@ -18,14 +18,20 @@ recipeController.getAllRecipes = (req, res, next) => {
   const { category } = req.query;
   const query = category ? { category } : {};
   console.log('in get recipes');
-  Recipe.find(query, (err, recipes) => {
-    if (err)
-      return next(
-        'Error in recipeController.getAllRecipes: ' + JSON.stringify(err)
-      );
-    res.locals.recipes = recipes;
-    return next();
-  });
+  Recipe.find(query)
+    .exec()
+    .then((recipes) => {
+      res.locals.recipes = recipes;
+      return next();
+    })
+    .catch((err) => {
+      return next({
+        log: `Error in recipeController.getAllRecipes: ${err}`,
+        message: {
+          err: 'Could not get recipes! See log for details',
+        },
+      });
+    });
 };
 
 recipeController.getOneRecipe = async (req, res, next) => {
