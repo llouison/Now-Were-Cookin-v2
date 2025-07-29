@@ -4,6 +4,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import recipeRouter from './routes/recipes.js';
+import userRouter from './routes/users.js';
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.get('/', (_req, res) => {
 });
 
 app.use('/recipes', recipeRouter);
+app.use('/user', userRouter);
 
 /* 404 handler - TO-DO: Create custom page */
 app.use('*catchall', (_req, res) => {
