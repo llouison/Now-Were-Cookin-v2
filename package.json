@@ -1,9 +1,13 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node --watch server/server.js"
+    "start": "node --watch server/server.js",
+    "dev": "vite --host"
   },
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.6"
   }
 }
