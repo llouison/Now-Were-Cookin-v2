@@ -13,7 +13,7 @@ userController.createUser = (req, res, next) => {
     password: password,
   })
     .then((data) => {
-      console.log(`💁🏽 userController.createUser: data: ${data}`);
+      //   console.log(`💁🏽 userController.createUser: data: ${data}`);
       res.locals.user = data;
       return next();
     })
@@ -34,21 +34,17 @@ userController.createUser = (req, res, next) => {
  */
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
-  //TO-DO: refactor to use .findOne
-  User.find({
+  User.findOne({
     username: username,
-  }) /*.find returns an array, userschema sets unique usernames */
-    .exec() //makes it a real promise
-    .then(async (data) => {
-      if (data.length === 0) {
+  })
+    .exec()
+    .then(async (user) => {
+      if (!data || !(await user.comparePasswords(password))) {
         res.locals.loggedIn = false;
       } else {
-        // console.log(`successful user Obj from mongo: ${data}`);
-        const user = data[0];
+        console.log(`🔍 successful user Obj from mongo: ${data}`);
         res.locals.loggedIn = true;
-        res.locals.userId = user._id.toString();
-        // Method to compare password
-        const passwordComparison = await user.comparePasswords(password);
+        res.locals.user = user;
       }
       next();
     })
