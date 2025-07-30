@@ -17,9 +17,14 @@ router.get('/:id', recipeController.getOneRecipe, (_req, res) => {
   res.status(200).send({ recipe: res.locals.recipe });
 });
 
-router.post('/', recipeController.createRecipe, (_req, res) => {
-  res.status(200).send({ newRecipe: res.locals.recipe });
-});
+router.post(
+  '/',
+  tokenController.protect,
+  recipeController.createRecipe,
+  (_req, res) => {
+    res.status(200).send({ newRecipe: res.locals.recipe });
+  }
+);
 
 router.put(
   '/:id',
