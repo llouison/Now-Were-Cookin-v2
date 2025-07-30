@@ -1,8 +1,11 @@
+import Navbar from './components/Navbar';
+import { AuthProvider } from './context/AuthContext';
+
 const App = () => {
   return (
-    <>
-      <h1>Now We're Cookin'</h1>
-    </>
+    <AuthProvider>
+      <Navbar />
+    </AuthProvider>
   );
 };
 
