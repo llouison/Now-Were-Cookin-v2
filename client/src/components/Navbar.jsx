@@ -20,7 +20,12 @@ const Navbar = () => {
         <div>
           {user ? (
             <div>
-              <button onClick={handleLogout}>Logout</button>
+              <Link to='/addrecipe'>
+                <button>Add Recipe</button>
+              </Link>
+              <div>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
             </div>
           ) : (
             <>
