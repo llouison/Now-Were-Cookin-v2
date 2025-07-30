@@ -13,14 +13,14 @@ export const AuthProvider = ({ children }) => {
       //if token is found, set token as authorization header in all future api requests
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      axios.get('/api/auth/me').then((res) => {
+      axios.get('/api/user/me').then((res) => {
         setUser(res.data);
       });
     }
   }, []);
 
   const login = async (username, password) => {
-    const res = await axios.post('api/user/login', {
+    const res = await axios.post('/api/user/login', {
       username,
       password,
     });
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signup = async (username, password) => {
-    const res = await axios.post('api/user/signup', {
+    const res = await axios.post('/api/user/signup', {
       username,
       password,
     });

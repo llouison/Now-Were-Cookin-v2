@@ -22,8 +22,8 @@ app.get('/', (_req, res) => {
   );
 });
 
-app.use('/recipes', recipeRouter);
-app.use('/user', userRouter);
+app.use('/api/recipes', recipeRouter);
+app.use('/api/user', userRouter);
 
 /* 404 handler - TO-DO: Create custom page */
 app.use('*catchall', (_req, res) => {
