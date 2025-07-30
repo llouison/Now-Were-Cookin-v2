@@ -4,10 +4,6 @@ import tokenController from '../controllers/tokenController.js';
 
 const router = express.Router();
 
-router.get('/signup', (_req, res) => {
-  res.status(500).send('To-Do:create a signup form');
-});
-
 router.get('/me', tokenController.protect, (req, res) => {
   res.status(200).json(req.user);
 });
