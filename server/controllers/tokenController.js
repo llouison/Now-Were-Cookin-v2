@@ -19,7 +19,7 @@ tokenController.protect = async (req, _res, next) => {
       // exclude password from find
       req.user = await User.findById(decoded.id).select('-password');
       return next();
-    } catch {
+    } catch (err) {
       return next({
         log: `Error caught in tokenController.protect: ${err}`,
         message: {
