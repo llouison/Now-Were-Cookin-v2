@@ -14,6 +14,8 @@ data from incoming requests and place it in req.body */
 app.use(express.json());
 app.use(express.urlencoded());
 
+app.use(express.static(path.resolve(import.meta.dirname, '../client')));
+
 app.get('/', (_req, res) => {
   res.sendFile(
     path.resolve(path.resolve(import.meta.dirname, '../index.html'))
