@@ -8,6 +8,10 @@ router.get('/signup', (_req, res) => {
   res.status(500).send('To-Do:create a signup form');
 });
 
+router.get('/me', tokenController.protect, (req, res) => {
+  res.status(200).json(req.user);
+});
+
 router.post(
   '/signup',
   userController.createUser,
