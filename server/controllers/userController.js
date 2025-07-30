@@ -30,8 +30,9 @@ userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
   const userExists = await User.findOne({ username: username });
   try {
-    if (!userExists || !(await User.comparePasswords(password))) {
+    if (!userExists || !(await userExists.comparePasswords(password))) {
       res.locals.loggedIn = false;
+      throw new Error('Invalid credentials');
     } else {
       console.log(`🔍 successful user Obj from mongo: ${userExists}`);
       res.locals.loggedIn = true;
