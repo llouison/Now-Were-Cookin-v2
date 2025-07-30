@@ -55,34 +55,30 @@ recipeController.getOneRecipe = async (req, res, next) => {
   }
 };
 
-recipeController.createRecipe = (req, res, next) => {
-  const {
-    title,
-    author,
-    category,
-    cookTime,
-    photo,
-    ingredients,
-    instructions,
-  } = req.body;
-  const recipeInfo = req.body;
-  Recipe.create(recipeInfo)
-    .exec()
-    .then((recipeDoc) => {
-      console.log('recipeDoc:', recipeDoc);
-      res.locals.recipe = recipeDoc;
-      return next();
-    })
-    .catch((err) => {
-      return next(
-        createErr({
-          log: `Error caught in recipeController.createRecipe: ${err}`,
-          message: {
-            err: 'Could not create recipe! See log for details',
-          },
-        })
-      );
+recipeController.createRecipe = async (req, res, next) => {
+  const { title, category, cookTime, photoUrl, ingredients, instructions } =
+    req.body;
+  try {
+    const recipe = await Recipe.create({
+      title,
+      author: req.user._id,
+      category,
+      cookTime,
+      photoUrl,
+      ingredients,
+      instructions,
     });
+    console.log(req.headers);
+    res.locals.recipe = recipe;
+    return next();
+  } catch (err) {
+    return next({
+      log: `Error caught in userController.createUser: ${err}`,
+      message: {
+        err: 'Could not create new user! See log for details',
+      },
+    });
+  }
 };
 
 recipeController.updateOneRecipe = async (req, res, next) => {
