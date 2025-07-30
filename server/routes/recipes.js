@@ -9,7 +9,7 @@ router.get(
   tokenController.protect,
   recipeController.getAllRecipes,
   (_req, res) => {
-    res.status(200).send({ recipes: res.locals.recipes });
+    res.status(200).send(res.locals.recipes);
   }
 );
 
