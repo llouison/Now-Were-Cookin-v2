@@ -17,7 +17,6 @@ const recipeController = {};
 recipeController.getAllRecipes = (req, res, next) => {
   const { category } = req.query;
   const query = category ? { category } : {};
-  console.log('in get recipes');
   Recipe.find(query)
     .exec()
     .then((recipes) => {
@@ -68,7 +67,6 @@ recipeController.createRecipe = async (req, res, next) => {
       ingredients,
       instructions,
     });
-    console.log(req.headers);
     res.locals.recipe = recipe;
     return next();
   } catch (err) {
