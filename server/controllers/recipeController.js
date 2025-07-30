@@ -94,6 +94,11 @@ recipeController.updateOneRecipe = async (req, res, next) => {
     if (!recipe) {
       return res.status(404).json({ message: 'Recipe not found' });
     }
+
+    if (recipe.createdBy.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ message: 'Not authorized' });
+    }
+
     recipe.title = title || recipe.title;
     recipe.category = category || recipe.category;
     recipe.cookTime = cookTime || recipe.cookTime;
@@ -121,6 +126,10 @@ recipeController.deleteOneRecipe = async (req, res, next) => {
     const recipe = await Recipe.findById(req.params.id);
     if (!recipe) {
       return res.status(404).json({ message: 'Recipe not found' });
+    }
+
+    if (recipe.createdBy.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ message: 'Not authorized' });
     }
 
     const deletedRecipe = await recipe.deleteOne();
