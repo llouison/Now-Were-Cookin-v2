@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { AuthContext } from '../context/AuthContext';
 
 const AddRecipe = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ const AddRecipe = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState('');
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -60,7 +62,7 @@ const AddRecipe = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    console.log(formData);
+    console.log(formData, user);
 
     try {
       await axios.post('/api/recipes', {
@@ -70,6 +72,7 @@ const AddRecipe = () => {
         ingredients: formData.ingredients,
         instructions: formData.instructions,
         photoUrl: formData.photoUrl,
+        author: user.user.username,
       });
       navigate('/');
     } catch (err) {
@@ -85,7 +88,7 @@ const AddRecipe = () => {
       <h1 className='primary'>Add Recipe</h1>
       <hr />
       <form className='input_form' id='input_form' onSubmit={handleSubmit}>
-        <div className='recipeform_container '>
+        <div className='recipeform_container'>
           <label htmlFor='title' className='title'>
             Title:
             <input
@@ -98,8 +101,6 @@ const AddRecipe = () => {
               onChange={(e) => handleInputChange('title', e.target.value)}
             />
           </label>
-          {/* </div>
-        <div> */}
           <label htmlFor='category' className='title'>
             Category:
             <select
@@ -119,8 +120,6 @@ const AddRecipe = () => {
               <option value='Snack'>Snack</option>
             </select>
           </label>
-          {/* </div>
-        <div> */}
           <label htmlFor='cooking_time' className='title'>
             Cooking Time:
             <input
@@ -134,8 +133,6 @@ const AddRecipe = () => {
               onChange={(e) => handleInputChange('cookTime', e.target.value)}
             />
           </label>
-          {/* </div>
-        <div> */}
           <p className='title'>Ingredients</p>
           {formData.ingredients.map((ingredient, index) => (
             <div key={index}>
@@ -160,8 +157,6 @@ const AddRecipe = () => {
           <button type='button' onClick={addIngredient}>
             Add Ingredient
           </button>
-          {/* </div>
-        <div> */}
           <label htmlFor='description' className='title'>
             Instructions:
             <br />
@@ -170,6 +165,8 @@ const AddRecipe = () => {
               name='description'
               id='description'
               className='form'
+              rows='4'
+              cols='50'
               placeholder='Tell us about your recipe here...'
               required
               value={formData.instructions}
@@ -179,8 +176,6 @@ const AddRecipe = () => {
             />
             <br />
           </label>
-          {/* </div>
-        <div> */}
           <label htmlFor='photoUrl' className='title'>
             Photo Url:
             <input
@@ -191,7 +186,6 @@ const AddRecipe = () => {
               onChange={(e) => handleInputChange('photoUrl', e.target.value)}
             />
           </label>
-          {/* </div> */}
           <button className='button' id='submit1' disabled={loading}>
             {loading ? 'Adding...' : 'Add Recipe'}
           </button>
