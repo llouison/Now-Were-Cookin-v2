@@ -56,12 +56,20 @@ recipeController.getOneRecipe = async (req, res, next) => {
 };
 
 recipeController.createRecipe = async (req, res, next) => {
-  const { title, category, cookTime, photoUrl, ingredients, instructions } =
-    req.body;
+  const {
+    title,
+    category,
+    cookTime,
+    photoUrl,
+    ingredients,
+    instructions,
+    author,
+  } = req.body;
   try {
     const recipe = await Recipe.create({
       title,
-      author: req.user._id,
+      createdBy: req.user._id,
+      author,
       category,
       cookTime,
       photoUrl,
@@ -92,7 +100,7 @@ recipeController.updateOneRecipe = async (req, res, next) => {
       throw new Error('Recipe does not exist');
     }
 
-    if (recipe.author.toString() !== req.user._id.toString()) {
+    if (recipe.createdBy.toString() !== req.user._id.toString()) {
       console.log('not auhtorized');
       throw new Error('Not Authorized');
     }
@@ -136,7 +144,7 @@ recipeController.deleteOneRecipe = async (req, res, next) => {
       return res.status(404).json({ message: 'Recipe not found' });
     }
 
-    if (recipe.author.toString() !== req.user._id.toString()) {
+    if (recipe.createdBy.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
