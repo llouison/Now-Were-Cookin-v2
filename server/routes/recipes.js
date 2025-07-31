@@ -14,7 +14,7 @@ router.get(
 );
 
 router.get('/:id', recipeController.getOneRecipe, (_req, res) => {
-  res.status(200).send({ recipe: res.locals.recipe });
+  res.status(200).send(res.locals.recipe);
 });
 
 router.post(
@@ -40,7 +40,7 @@ router.delete(
   tokenController.protect,
   recipeController.deleteOneRecipe,
   (_req, res) => {
-    res.status(200).send({ deletedRecipe: res.locals.recipe });
+    res.status(200).send({ message: 'recipe deleted' });
   }
 );
 
