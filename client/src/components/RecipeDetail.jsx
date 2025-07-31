@@ -26,9 +26,6 @@ const RecipeDetail = (props) => {
       try {
         const res = await axios.get(`/api/recipes/${id}`);
         setRecipe(res.data);
-        if (user && user._id === res.data.author) {
-          setIsDisabled(false);
-        }
       } catch (err) {
         console.log(err);
       }
@@ -42,28 +39,49 @@ const RecipeDetail = (props) => {
   console.log('user:', user, 'recipe', recipe);
 
   return (
-    <div>
-      <img src={recipe.photoUrl} alt={recipe.title} />
-      <h1>{recipe.title}</h1>
-      <p>Category: {recipe.category}</p>
-      <p>CookTime: {recipe.cookTime} minutes</p>
-      <h2>Ingredients</h2>
-      <ul>
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient}</li>
-        ))}
-      </ul>
-      <h2>Instructions</h2>
-      <p>{recipe.instructions}</p>
-      <div>
-        <Link to={`/editrecipe/${id}`}>
-          <button disabled={isDisabled}>Edit</button>
-        </Link>
-
-        <button onClick={handleDelete} disabled={isDisabled}>
-          Delete
-        </button>
+    <div className='container recipeform_container'>
+      <div className='polaroid single'>
+        <div className='polaroid_photo'>
+          <img src={recipe.photoUrl} alt={recipe.title} />
+        </div>
+        <div className='polaroid_content'>
+          <h1 className='individ recipe_title'>{recipe.title}</h1>
+        </div>
       </div>
+      <div className='description'>
+        <p>
+          <span className='title'>Author: </span>
+          {recipe.author}
+        </p>
+        <p>
+          <span className='title'>Category: </span> {recipe.category}
+        </p>
+        <p>
+          <span className='title'>Cook Time: </span> {recipe.cookTime} minutes
+        </p>
+        <span className='title'>Ingredients: </span>
+        {/* <ul> */}
+        {recipe.ingredients.map((ingredient, index) => (
+          <p key={index}>- {ingredient}</p>
+        ))}
+        {/* </ul> */}
+        <p className='description_text'>
+          <span className='title'>Instructions: </span>
+          <br />
+          {recipe.instructions}
+        </p>
+      </div>
+      {user && user._id === recipe.createdBy && (
+        <div>
+          <Link to={`/editrecipe/${id}`}>
+            <button className='button'>Edit</button>
+          </Link>
+
+          <button className='button' onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -34,29 +34,35 @@ const Home = () => {
   }, [category]);
 
   return (
-    <div>
-      <div>
+    <div className='fullWidth'>
+      <div className='catContainer'>
         {categories.map((cat) => (
-          <button
+          <a
             onClick={() => setCategory(cat)}
             key={cat}
-            className={`${category === cat ? 'categorySelected' : 'category'}`}
+            className={`${category === cat ? 'current' : 'category'}`}
           >
             {cat}
-          </button>
+          </a>
         ))}
       </div>
-      <div>
+      <div className='container'>
+        <h1 className='primary'>Recipes</h1>
+        <hr />
         {recipes.map((recipe) => (
           <Link to={`/recipe/${recipe._id}`} key={recipe._id}>
-            {recipe.photoUrl && (
-              <img src={recipe.photoUrl} alt={recipe.title} />
-            )}
-            <div>
-              <h2>{recipe.title}</h2>
-              <p>{recipe.category}</p>
-              <p>Created By: {user.username}</p>
-              <p>{recipe.cookTime}</p>
+            <div className='polaroid single index'>
+              <div className='polaroid_photo'>
+                {recipe.photoUrl && (
+                  <img src={recipe.photoUrl} alt={recipe.title} />
+                )}
+              </div>
+              <div className='polaroid_content'>
+                <h1 className='secondary recipe_title'>{recipe.title}</h1>
+                <h2 className='tertiary'>
+                  {`a ${recipe.cookTime} minute ${recipe.category} by: ${recipe.author}`}
+                </h2>
+              </div>
             </div>
           </Link>
         ))}

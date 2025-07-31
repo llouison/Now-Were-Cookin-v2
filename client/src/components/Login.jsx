@@ -21,7 +21,8 @@ const Login = () => {
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <hr />
+      <form className='center_form' onSubmit={handleSubmit}>
         <div>
           <label>Username</label>
           <input
@@ -42,7 +43,9 @@ const Login = () => {
             name='password'
           />
         </div>
-        <button type='submit'>Login</button>
+        <button className='button' type='submit'>
+          Login
+        </button>
       </form>
     </div>
   );
