@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router';
 
 const RecipeDetail = (props) => {
   const [recipe, setRecipe] = useState(null);
@@ -55,7 +56,10 @@ const RecipeDetail = (props) => {
       <h2>Instructions</h2>
       <p>{recipe.instructions}</p>
       <div>
-        <button disabled={isDisabled}>Edit</button>
+        <Link to={`/editrecipe/${id}`}>
+          <button disabled={isDisabled}>Edit</button>
+        </Link>
+
         <button onClick={handleDelete} disabled={isDisabled}>
           Delete
         </button>
