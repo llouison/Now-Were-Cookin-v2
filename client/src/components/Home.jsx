@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
+import { AuthContext } from '../context/AuthContext';
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [category, setCategory] = useState('All');
+  const { user } = useContext(AuthContext);
 
   const categories = [
     'All',
@@ -53,6 +55,7 @@ const Home = () => {
             <div>
               <h2>{recipe.title}</h2>
               <p>{recipe.category}</p>
+              <p>Created By: {user.username}</p>
               <p>{recipe.cookTime}</p>
             </div>
           </Link>
