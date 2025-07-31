@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router';
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -45,7 +46,7 @@ const Home = () => {
       </div>
       <div>
         {recipes.map((recipe) => (
-          <div key={recipe._id}>
+          <Link to={`/recipe/${recipe._id}`} key={recipe._id}>
             {recipe.photoUrl && (
               <img src={recipe.photoUrl} alt={recipe.title} />
             )}
@@ -54,7 +55,7 @@ const Home = () => {
               <p>{recipe.category}</p>
               <p>{recipe.cookTime}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
