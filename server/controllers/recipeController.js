@@ -81,27 +81,40 @@ recipeController.createRecipe = async (req, res, next) => {
 };
 
 recipeController.updateOneRecipe = async (req, res, next) => {
-  const { title, category, cookTime, photo, ingredients, instructions } =
+  const { title, category, cookTime, photoUrl, ingredients, instructions } =
     req.body;
   const recipeInfo = req.body;
   try {
     const recipe = await Recipe.findById(req.params.id);
+
     if (!recipe) {
-      return res.status(404).json({ message: 'Recipe not found' });
+      console.log('no recipe');
+      throw new Error('Recipe does not exist');
     }
 
-    if (recipe.createdBy.toString() !== req.user._id.toString()) {
-      return res.status(401).json({ message: 'Not authorized' });
+    if (recipe.author.toString() !== req.user._id.toString()) {
+      console.log('not auhtorized');
+      throw new Error('Not Authorized');
     }
 
+    // Document changed in MongoDB, but not in Mongoose
+    await Recipe.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: recipeInfo,
+      }
+    );
+
+    //updating document in mongoose
     recipe.title = title || recipe.title;
     recipe.category = category || recipe.category;
     recipe.cookTime = cookTime || recipe.cookTime;
-    recipe.photo = photo || recipe.photo;
+    recipe.photoUrl = photoUrl || recipe.photoUrl;
     recipe.ingredients = ingredients || recipe.ingredients;
     recipe.instructions = instructions || recipe.instructions;
 
     const updatedRecipe = await recipe.save();
+
     res.locals.recipe = updatedRecipe;
     next();
   } catch (err) {
