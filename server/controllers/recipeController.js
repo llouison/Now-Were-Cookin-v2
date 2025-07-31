@@ -14,23 +14,23 @@ const createErr = (errInfo) => {
 
 const recipeController = {};
 
-recipeController.getAllRecipes = (req, res, next) => {
+recipeController.getAllRecipes = async (req, res, next) => {
   const { category } = req.query;
   const query = category ? { category } : {};
-  Recipe.find(query)
-    .exec()
-    .then((recipes) => {
-      res.locals.recipes = recipes;
-      return next();
-    })
-    .catch((err) => {
-      return next({
-        log: `Error in recipeController.getAllRecipes: ${err}`,
+  try {
+    const recipes = await Recipe.find(query);
+    res.locals.recipes = recipes;
+    next();
+  } catch (err) {
+    return next(
+      createErr({
+        log: `Error caught in recipeController.getAllRecipes: ${err}`,
         message: {
           err: 'Could not get recipes! See log for details',
         },
-      });
-    });
+      })
+    );
+  }
 };
 
 recipeController.getOneRecipe = async (req, res, next) => {
@@ -42,6 +42,7 @@ recipeController.getOneRecipe = async (req, res, next) => {
       );
     }
     res.locals.recipe = recipe;
+    next();
   } catch (err) {
     return next(
       createErr({
@@ -68,7 +69,7 @@ recipeController.createRecipe = async (req, res, next) => {
       instructions,
     });
     res.locals.recipe = recipe;
-    return next();
+    next();
   } catch (err) {
     return next({
       log: `Error caught in userController.createUser: ${err}`,
@@ -122,12 +123,11 @@ recipeController.deleteOneRecipe = async (req, res, next) => {
       return res.status(404).json({ message: 'Recipe not found' });
     }
 
-    if (recipe.createdBy.toString() !== req.user._id.toString()) {
+    if (recipe.author.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
-    const deletedRecipe = await recipe.deleteOne();
-    res.locals.recipe = deletedRecipe;
+    await recipe.deleteOne();
     next();
   } catch (err) {
     return next(
