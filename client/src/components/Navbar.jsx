@@ -11,35 +11,34 @@ const Navbar = () => {
     navigate('/login');
   };
   return (
-    <nav>
-      <div>
-        <Link to='/'>
-          <h1>Now We're Cookin'</h1>
-        </Link>
-
-        <div>
-          {user ? (
-            <div>
-              <Link to='/addrecipe'>
-                <button>Add Recipe</button>
-              </Link>
-              <div>
-                <button onClick={handleLogout}>Logout</button>
-              </div>
-            </div>
-          ) : (
-            <>
-              <Link to='/login'>
-                <button>Login</button>
-              </Link>
-              <Link to='/signup'>
-                <button>Signup</button>
-              </Link>
-            </>
-          )}
-        </div>
-      </div>
-    </nav>
+    <header>
+      <Link to='/'>
+        <h3 className='logo' id='top'>
+          Now We're Cookin'
+        </h3>
+      </Link>
+      <nav>
+        {user ? (
+          <>
+            <li>
+              <Link to='/addrecipe'>Add Recipe</Link>
+            </li>
+            <li>
+              <a onClick={handleLogout}>Logout</a>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to='/login'>Login</Link>
+            </li>
+            <li>
+              <Link to='/signup'>Signup</Link>
+            </li>
+          </>
+        )}
+      </nav>
+    </header>
   );
 };
 
