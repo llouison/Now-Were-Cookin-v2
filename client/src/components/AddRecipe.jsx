@@ -81,55 +81,75 @@ const AddRecipe = () => {
   };
 
   return (
-    <div>
-      <h1>Add Recipe</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title</label>
-          <input
-            type='text'
-            required
-            value={formData.title}
-            onChange={(e) => handleInputChange('title', e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Category</label>
-          <select
-            onChange={(e) => handleInputChange('category', e.target.value)}
-            value={formData.category}
-            required
-          >
-            <option value='' disabled>
-              Choose Category
-            </option>
-            <option value='Breakfast'>Breakfast</option>
-            <option value='Lunch'>Lunch</option>
-            <option value='Dinner'>Dinner</option>
-            <option value='Dessert'>Dessert</option>
-            <option value='Snack'>Snack</option>
-          </select>
-        </div>
-        <div>
-          <label>Cooking Time (mins)</label>
-          <input
-            type='number'
-            required
-            value={formData.cookTime}
-            onChange={(e) => handleInputChange('cookTime', e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Ingredients</label>
+    <div className='container'>
+      <h1 className='primary'>Add Recipe</h1>
+      <hr />
+      <form className='input_form' id='input_form' onSubmit={handleSubmit}>
+        <div className='recipeform_container '>
+          <label htmlFor='title' className='title'>
+            Title:
+            <input
+              type='text'
+              name='title'
+              id='title'
+              className='form'
+              required
+              value={formData.title}
+              onChange={(e) => handleInputChange('title', e.target.value)}
+            />
+          </label>
+          {/* </div>
+        <div> */}
+          <label htmlFor='category' className='title'>
+            Category:
+            <select
+              className='category_type'
+              id='category'
+              onChange={(e) => handleInputChange('category', e.target.value)}
+              value={formData.category}
+              required
+            >
+              <option value='' disabled>
+                Choose Category
+              </option>
+              <option value='Breakfast'>Breakfast</option>
+              <option value='Lunch'>Lunch</option>
+              <option value='Dinner'>Dinner</option>
+              <option value='Dessert'>Dessert</option>
+              <option value='Snack'>Snack</option>
+            </select>
+          </label>
+          {/* </div>
+        <div> */}
+          <label htmlFor='cooking_time' className='title'>
+            Cooking Time:
+            <input
+              name='cooking_time'
+              id='cooking_time'
+              className='form'
+              type='number'
+              placeholder=' in minutes'
+              required
+              value={formData.cookTime}
+              onChange={(e) => handleInputChange('cookTime', e.target.value)}
+            />
+          </label>
+          {/* </div>
+        <div> */}
+          <p className='title'>Ingredients</p>
           {formData.ingredients.map((ingredient, index) => (
             <div key={index}>
+              {/* <label htmlFor={`ingredient${index + 1}`}> */}
               <input
                 type='text'
+                name={`ingredient${index + 1}`}
+                id={`ingredient${index + 1}`}
                 required
                 placeholder={'Enter Ingredient'}
                 value={ingredient}
                 onChange={(e) => handleIngredientChange(index, e.target.value)}
               />
+              {/* </label> */}
               {formData.ingredients.length > 1 && (
                 <button type='button' onClick={() => removeIngredient(index)}>
                   Remove
@@ -140,28 +160,42 @@ const AddRecipe = () => {
           <button type='button' onClick={addIngredient}>
             Add Ingredient
           </button>
+          {/* </div>
+        <div> */}
+          <label htmlFor='description' className='title'>
+            Instructions:
+            <br />
+            <textarea
+              type='text'
+              name='description'
+              id='description'
+              className='form'
+              placeholder='Tell us about your recipe here...'
+              required
+              value={formData.instructions}
+              onChange={(e) =>
+                handleInputChange('instructions', e.target.value)
+              }
+            />
+            <br />
+          </label>
+          {/* </div>
+        <div> */}
+          <label htmlFor='photoUrl' className='title'>
+            Photo Url:
+            <input
+              id='photoUrl'
+              type='text'
+              required
+              value={formData.photoUrl}
+              onChange={(e) => handleInputChange('photoUrl', e.target.value)}
+            />
+          </label>
+          {/* </div> */}
+          <button className='button' id='submit1' disabled={loading}>
+            {loading ? 'Adding...' : 'Add Recipe'}
+          </button>
         </div>
-        <div>
-          <label>Instructions</label>
-          <textarea
-            type='text'
-            required
-            value={formData.instructions}
-            onChange={(e) => handleInputChange('instructions', e.target.value)}
-          />
-        </div>
-        <div>
-          <label>PhotoUrl</label>
-          <input
-            type='text'
-            required
-            value={formData.photoUrl}
-            onChange={(e) => handleInputChange('photoUrl', e.target.value)}
-          />
-        </div>
-        <button disabled={loading}>
-          {loading ? 'Adding...' : 'Add Recipe'}
-        </button>
       </form>
     </div>
   );
