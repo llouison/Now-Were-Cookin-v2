@@ -13,7 +13,7 @@ router.post(
   userController.createUser,
   tokenController.generateToken,
   (_req, res) => {
-    res.status(200).send({ token: res.locals.token, newuser: res.locals.user });
+    res.status(200).send({ token: res.locals.token, user: res.locals.user });
   }
 );
 
