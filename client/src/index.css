@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -28,6 +28,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: #222 url('../assets/bg.png');
+  color: #f4f4f4;
+  background: linear-gradient(90deg, #222 10%, #222 90%);
 }
 
 h1 {
@@ -64,5 +67,449 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+} */
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  line-height: 1.4em;
+  color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #222 url('./assets/bg.png');
+  background-attachment: fixed;
+}
+
+/* ###### Navigation ###### */
+
+header {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 99vw;
+  justify-content: space-between;
+}
+header > a {
+  margin-left: 15px;
+}
+
+li {
+  /* flex: 1; */
+  font-size: 20px;
+  list-style: none;
+}
+li {
+  margin: 0 10px;
+}
+.logo {
+  flex: 2;
+  font-size: 23px;
+  font-family: 'Love Ya Like A Sister', cursive;
+  text-align: left;
+  color: #f4f4f4;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* text-align: right; */
+  font-size: 20px;
+}
+.current,
+nav a:hover {
+  color: #f4f4f4;
+  border-bottom: dotted;
+}
+
+/* ###### Text ####### */
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  word-wrap: break-word;
+}
+.title,
+.primary {
+  font-family: 'Love Ya Like A Sister', cursive;
+}
+.primary {
+  color: #f4f4f4;
+  margin: 30px;
+}
+.title {
+  color: #e25d38;
+}
+.recipe_title {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 40px;
+  color: #222;
+  padding: 20px;
+}
+.individ {
+  padding: 0;
+  line-height: 40px;
+}
+.secondary {
+  font-size: 35px;
+  padding: 5px;
+}
+h2 {
+  padding-bottom: 12px;
+  text-align: center;
+  color: #222;
+}
+p {
+  margin: 1em 0;
+}
+hr {
+  width: 70vw;
+  border: 1px solid #f4f4f4;
+}
+.catContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.fullWidth {
+  margin-top: 100px;
+}
+textarea {
+  min-width: 400px;
+}
+
+/* ###### Links ###### */
+
+a {
+  color: #818181;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+a:hover {
+  color: #f4f4f4;
+}
+.back {
+  display: block;
+  padding: 10px;
+}
+
+/* ###### Polaroid Container ###### */
+
+.container {
+  width: 90vw;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.polaroid {
+  width: 50vh;
+  height: 60vh;
+  background: #f5f5f5;
+  margin: 20px auto;
+  box-shadow: 3px 2px 7px 2px rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(5deg);
+}
+a > .polaroid {
+  transform: rotate(0deg);
+}
+.single {
+  margin: 40px;
+  box-sizing: border-box;
+}
+.polaroid:nth-of-type(2n + 0) {
+  transform: rotate(-2deg);
+}
+.polaroid:nth-of-type(3n + 0) {
+  transform: rotate(1deg);
+}
+.polaroid_content {
+  flex: 1;
+  height: 20vh;
+  width: 50vh;
+}
+.description {
+  width: 40%;
+}
+
+/* ###### Images ###### */
+.index_img {
+  width: 50%;
+}
+.attribution {
+  width: 10%;
+}
+.polaroid_photo {
+  width: 50vh;
+  height: 45vh;
+  border: 20px solid #f5f5f5;
+  box-sizing: border-box;
+  align-self: flex-start;
+}
+.blank {
+  background: #222;
+}
+.polaroid_photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ###### Form ###### */
+#ingredientlist {
+  margin: 10px 0;
+}
+.hidden {
+  display: none;
+}
+.input_form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.recipeform_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+input,
+textarea {
+  font-size: 1em;
+  color: #f4f4f4;
+  padding: 5px;
+  border: none;
+  border-bottom: 3px solid grey;
+  background-color: transparent;
+  margin: 10px;
+  transition: 0.5s all;
+  min-width: 250px;
+}
+input:focus {
+  outline: none;
+  border-bottom: 3px solid #f4f4f4;
+  transition: 0.5s all;
+}
+select {
+  width: 40%;
+  height: 30px;
+  color: #222;
+  font-size: 18px;
+  margin: 10px 15px 20px;
+}
+.single_form {
+  display: inline-block;
+}
+textarea {
+  width: 75%;
+  height: 20vh;
+  border: 3px solid grey;
+}
+textarea:focus {
+  outline: none;
+  border: 3px solid #f4f4f4;
+}
+#photourl {
+  color: #222;
+  width: 80%;
+}
+#photourl:focus {
+  border-bottom: 3px solid #222;
+}
+.button_container {
+  text-align: center;
+}
+.center_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form_container {
+  width: 50%;
+  text-align: center;
+}
+.form_container label {
+  display: block;
+}
+.search {
+  width: 80%;
+  margin: 50px;
+}
+.search input {
+  width: 50%;
+}
+
+/* ###### Buttons ###### */
+.button {
+  font-size: 1em;
+  color: #f4f4f4;
+  padding: 10px;
+  border: 1px dashed #f4f4f4;
+  border-radius: 10px;
+  background: transparent;
+  margin: 20px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  max-width: 200px;
+}
+.button:hover {
+  color: #222;
+  background-color: #f4f4f4;
+  border: none;
+  box-shadow: inset 0px 0px 6px 1px rgba(0, 0, 0, 0.75);
+}
+.black {
+  color: #222;
+  padding: 2px 8px;
+  border: 1px solid #222;
+  border-radius: 6px;
+  margin: 0 5px;
+}
+#topButton {
+  position: fixed;
+  right: 30px;
+  bottom: 20px;
+  opacity: 0.5;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+/* ###### Footer ###### */
+footer p {
+  color: grey;
+}
+footer a {
+  text-decoration: underline;
+}
+
+/*###### Tablet Media Query ######*/
+/*################################*/
+
+@media screen and (max-width: 1000px) {
+  body,
+  select {
+    font-size: 16px;
+  }
+  header {
+    margin-top: 10px;
+    flex-direction: column;
+  }
+  nav {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .logo {
+    text-align: center;
+  }
+  /* ####### Text ###### */
+  h1 {
+    font-size: 20px;
+  }
+  li {
+    font-size: 16px;
+    text-align: center;
+    padding: 5px;
+  }
+  h3,
+  h4 {
+    font-size: 18px;
+  }
+  h3 {
+    line-height: 30px;
+  }
+  .attribution {
+    width: 20%;
+  }
+  /* ###### Polaroid Container ###### */
+  .polaroid {
+    width: 40vw;
+    height: 50vw;
+  }
+  .polaroid_photo {
+    width: 40vw;
+    height: 35vw;
+  }
+  .polaroid_content {
+    height: 15vw;
+    width: 40vw;
+  }
+}
+/*###### Mobile Media Query ######*/
+@media screen and (max-width: 600px) {
+  .nav {
+    text-align: center;
+  }
+  /* .tertiary {
+    display: none;
+  } */
+  /* ###### Polaroid Container ###### */
+  .container {
+    margin: 20px;
+  }
+  .polaroid {
+    width: 50vw;
+    height: 60vw;
+    margin: 20px;
+  }
+  .polaroid_photo {
+    width: 50vw;
+    height: 45vw;
+    border: 10px solid #f5f5f5;
+  }
+  .polaroid_content {
+    height: 25vw;
+    width: 50vw;
+    margin-bottom: 10px;
+  }
+  .index {
+    filter: none;
+  }
+  /* ###### Form ###### */
+  .input_form {
+    width: 100%;
+  }
+  /* ###### Text ###### */
+  .recipe_title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .secondary {
+    padding-top: 0;
+  }
+  .individ {
+    padding: 0 5px 8px;
+  }
+  .description {
+    width: 60%;
+  }
+  .button {
+    display: inline-block;
+  }
+  .black {
+    padding: 0 5px;
+  }
+  #topButton {
+    width: 40px;
+    right: 5px;
   }
 }
