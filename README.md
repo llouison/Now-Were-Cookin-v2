@@ -52,7 +52,7 @@ Users should be able to:
 1. Drew out schema for user and recipe databases
 2. Constructed wireframes to gain an understanding of the flow of the app.
 3. Set up the github repo and project board with a list of steps to completion.
-4. Create server and
+4. Created and started local server
 5. Created model, controller, and route architecture
 6. Test requests in PostMan
 7. Created React components
@@ -74,9 +74,8 @@ This is how the application
 ## Installation Instructions
 
 1. Run `npm install` to install all necessary dependencies listed in the package.json
-2. In psql run `create database recipe_development`
-3. Create a `.env` file in the root. You'll need to have a `MONGO_URI` to connect to your MongoDB and a `JWT_SECRET` to create and validate user tokens (authentication).
-4. To launch the app locally run `npm run dev` from the root folder and navigate to **localhost:5173** in your browser.
+2. Create a `.env` file in the root. You'll need to have a `MONGO_URI` to connect to your MongoDB and a `JWT_SECRET` to create and validate user tokens (authentication).
+3. To launch the app locally run `npm run dev` from the root folder and navigate to **localhost:5173** in your browser.
 
 ## Unsolved Problems
 
